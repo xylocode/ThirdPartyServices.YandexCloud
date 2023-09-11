@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<IncludeContentInPack>true</IncludeContentInPack>
+	<TargetFrameworks>net7.0;net6.0;net47;net471;net472;net48;net481</TargetFrameworks>
+	<ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>XyloCode.ThirdPartyServices.YandexCloud</AssemblyName>
+    <RootNamespace>XyloCode.ThirdPartyServices.YandexCloud</RootNamespace>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Yandex, Yandex.Cloud, API</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <PackageId>XyloCode.ThirdPartyServices.YandexCloud</PackageId>
+    <Title>YandexCloud</Title>
+    <RepositoryUrl>https://github.com/xylocode/ThirdPartyServices.YandexCloud</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright (c) YANDEX LLC, Sergey Korobeynikov 2023</Copyright>
+    <Authors>xylocode</Authors>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Description>Unofficial assembly of .proto files for working with the Yandex.Cloud API using the gRPC protocol.</Description>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <PackageProjectUrl>https://xylocode.com/third-party-services/yandex.cloud/</PackageProjectUrl>
+    <PackageReleaseNotes>In the file yandex\cloud\datatransfer\v1\endpoint\parsers.proto message Parser has been renamed to Parser1, renamed dependencies.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <None Include="LOGO.png" Pack="true" PackagePath="" />
+	  <None Include="README.md" Pack="true" PackagePath="" />
+	  <Protobuf Include="**\*.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.24.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.57.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.58.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
