@@ -6,7 +6,7 @@
     <Nullable>disable</Nullable>
     <AssemblyName>XyloCode.ThirdPartyServices.YandexCloud</AssemblyName>
     <RootNamespace>XyloCode.ThirdPartyServices.YandexCloud</RootNamespace>
-    <PackageIcon>logo.png</PackageIcon>
+    <PackageIcon>LOGO.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Yandex, Yandex.Cloud, API</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

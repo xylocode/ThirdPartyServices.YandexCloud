@@ -37,7 +37,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            const string iam = @"t1...";
+            const string token = @"t1...";
             const string folderId = "...";
 
             using var channel = GrpcChannel.ForAddress("https://translate.api.cloud.yandex.net");
