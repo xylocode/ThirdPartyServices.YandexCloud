@@ -38,8 +38,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             string token;
-            token = @"Bearer ...";  // for IAM-token
-            token = @"Api-Key ..."; // for API-key
+            token = @"Bearer t1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX...";  // for IAM-token
+            token = @"Api-Key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; // for API-key
 
             string folderId = "...";
 
