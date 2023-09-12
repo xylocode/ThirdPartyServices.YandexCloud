@@ -37,12 +37,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            const string token = @"t1...";
-            const string folderId = "...";
+            string token;
+            token = @"Bearer ...";  // for IAM-token
+            token = @"Api-Key ..."; // for API-key
+
+            string folderId = "...";
 
             using var channel = GrpcChannel.ForAddress("https://translate.api.cloud.yandex.net");
             var ts = new TranslationService.TranslationServiceClient(channel);
-            var headers = new Metadata { { "Authorization", $"Bearer {token}" } };
+            var headers = new Metadata { { "Authorization", token } };
             
             var req1 = new ListLanguagesRequest { FolderId = folderId };
             var res1 = ts.ListLanguages(req1, headers);
