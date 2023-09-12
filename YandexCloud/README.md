@@ -41,7 +41,7 @@ namespace ConsoleApp1
             token = @"Bearer t1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX...";  // for IAM-token
             token = @"Api-Key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; // for API-key
 
-            string folderId = "...";
+            string folderId = "xxxxxxxxxxxxxxxxxxxx";
 
             using var channel = GrpcChannel.ForAddress("https://translate.api.cloud.yandex.net");
             var ts = new TranslationService.TranslationServiceClient(channel);
