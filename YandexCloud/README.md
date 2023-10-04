@@ -21,7 +21,7 @@ In the file `yandex\cloud\datatransfer\v1\endpoint\parsers.proto` `message Parse
 
 ## How to use
 
-Before creating a communication channel, you need to understand which endpoint should be used, for this you should refer to the documentation:
+Before creating a communication channel, you need to use the appropriate endpoint, for this you should refer to the documentation:
 [https://cloud.yandex.com/en/docs/api-design-guide/concepts/endpoints](https://cloud.yandex.com/en/docs/api-design-guide/concepts/endpoints)
 
 Also, IAM-Token or service account should be used as a token.

@@ -351,6 +351,10 @@ message DeployPolicy {
   // Affects the lifecycle of the instance during deployment.
   Strategy strategy = 8;
 
+  // If instance update requires a less disruptive action than [minimal_action],
+  // Instance Groups performs [minimal_action] to execute the update
+  MinimalAction minimal_action = 14;
+
   enum Strategy {
     STRATEGY_UNSPECIFIED = 0;
 
@@ -361,6 +365,16 @@ message DeployPolicy {
     // Instead, it will wait until the instance stops itself or becomes unhealthy.
     OPPORTUNISTIC = 2;
   }
+
+  enum MinimalAction {
+    MINIMAL_ACTION_UNSPECIFIED = 0;
+    // Updating an instance without stopping. This is the default.
+    LIVE_UPDATE = 1;
+    // Updating an instance with restart: stopping and then starting the instance.
+    RESTART = 2;
+    // Re-creating an instance: deleting an instance and creating a new one.
+    RECREATE = 3;
+  }
 }
 
 message AllocationPolicy {
@@ -370,6 +384,11 @@ message AllocationPolicy {
   message Zone {
     // ID of the availability zone where the instance resides.
     string zone_id = 1 [(required) = true];
+    // Each instance in a zone will be associated with exactly one of a tag from a pool below.
+    // All specified tags must be unique across the whole group not only the zone.
+    // It is guaranteed that during whole deploy only tags from prefix of the specified list will be used.
+    // It is possible to use tag associated with instance in templating via {instance.tag}.
+    repeated string instance_tags_pool = 2 [(unique) = true, (length) = "3-50"];
   }
 }
 
@@ -663,9 +682,13 @@ message NetworkSettings {
 message LoadBalancerSpec {
   // Specification of the target group that the instance group will be added to. For more information, see [Target groups and resources](/docs/network-load-balancer/concepts/target-resources).
   TargetGroupSpec target_group_spec = 1;
+
   // Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded,
   // the VM will be turned off based on the deployment policy. Specified in seconds.
   google.protobuf.Duration max_opening_traffic_duration = 2 [(value) = ">=1s"];
+
+  // Do not wait load balancer health checks.
+  bool ignore_health_checks = 4;
 }
 
 message TargetGroupSpec {
@@ -686,6 +709,9 @@ message ApplicationLoadBalancerSpec {
   // Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded,
   // the VM will be turned off based on the deployment policy. Specified in seconds.
   google.protobuf.Duration max_opening_traffic_duration = 2 [(value) = ">=1s"];
+
+  // Do not wait load balancer health checks.
+  bool ignore_health_checks = 3;
 }
 
 message ApplicationTargetGroupSpec {
@@ -823,6 +849,9 @@ message ManagedInstance {
 
   // The timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format when the status of the managed instance was last changed.
   google.protobuf.Timestamp status_changed_at = 9;
+
+  // Managed instance tag.
+  string instance_tag = 14;
 }
 
 message NetworkInterface {
