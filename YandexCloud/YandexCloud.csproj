@@ -19,7 +19,6 @@
     <RepositoryType>git</RepositoryType>
     <Copyright>Copyright (c) 2023 YANDEX LLC, Sergey Korobeynikov</Copyright>
     <Authors>xylocode</Authors>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Description>Unofficial assembly of .proto files for working with the Yandex.Cloud API using the gRPC protocol.</Description>
     <PackageProjectUrl>https://xylocode.com/third-party-services/yandex.cloud/</PackageProjectUrl>
     <PackageReleaseNotes>The "How to use" section in the README.md file has been updated. In the file yandex\cloud\datatransfer\v1\endpoint\parsers.proto message Parser has been renamed to Parser1, renamed dependencies.</PackageReleaseNotes>
@@ -34,13 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.24.3" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.57.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.58.0">
+    <PackageReference Include="Google.Protobuf" Version="3.25.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.59.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
