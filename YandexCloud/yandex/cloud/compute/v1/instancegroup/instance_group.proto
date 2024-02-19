@@ -81,6 +81,9 @@ message InstanceGroup {
   // Returned if there is a working load balancer that the target group is connected to.
   ApplicationLoadBalancerState application_load_balancer_state = 21;
 
+  // AutoHealingPolicy policy of the instance group.
+  AutoHealingPolicy auto_healing_policy = 22;
+
   enum Status {
     STATUS_UNSPECIFIED = 0;
 
@@ -480,6 +483,9 @@ message InstanceTemplate {
   // To use the instance with an attached filesystem, the latter must be mounted.
   // For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
   repeated AttachedFilesystemSpec filesystem_specs = 15;
+
+  // Metadata options for the instance
+  MetadataOptions metadata_options = 16;
 }
 
 message AttachedFilesystemSpec {
@@ -913,4 +919,38 @@ message LogRecord {
 
   // The log message.
   string message = 2;
+}
+
+message AutoHealingPolicy {
+  enum AutoHealingAction {
+    AUTO_HEALING_ACTION_UNSPECIFIED = 0;
+    // Re-starting an instance with restart: stopping and then starting the instance.
+    RESTART = 1;
+    // Re-creating an instance: deleting an instance and creating a new one.
+    RECREATE = 2;
+    // No action
+    NONE = 3;
+  }
+
+  // Instance Groups performs [auto_healing_action] when instance becomes unhealthy.
+  AutoHealingAction auto_healing_action = 1;
+}
+
+message MetadataOptions {
+  // Enabled access to GCE flavored metadata
+  MetadataOption gce_http_endpoint = 1;
+  // Enabled access to AWS flavored metadata (IMDSv1)
+  MetadataOption aws_v1_http_endpoint = 2;
+  // Enabled access to IAM credentials with GCE flavored metadata
+  MetadataOption gce_http_token = 3;
+  // Enabled access to IAM credentials with AWS flavored metadata (IMDSv1)
+  MetadataOption aws_v1_http_token = 4;
+}
+
+enum MetadataOption {
+  METADATA_OPTION_UNSPECIFIED = 0;
+  // Option is enabled
+  ENABLED = 1;
+  // Option is disabled
+  DISABLED = 2;
 }

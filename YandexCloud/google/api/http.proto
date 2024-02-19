@@ -22,8 +22,6 @@ option java_multiple_files = true;
 option java_outer_classname = "HttpProto";
 option java_package = "com.google.api";
 option objc_class_prefix = "GAPI";
-option csharp_namespace = "XyloCode.ThirdPartyServices.Google.API";
-
 
 
 // Defines the HTTP configuration for a service. It contains a list of

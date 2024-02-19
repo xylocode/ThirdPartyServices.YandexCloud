@@ -3,11 +3,13 @@ syntax = "proto3";
 package yandex.cloud.compute.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "yandex/cloud/access/access.proto";
 import "yandex/cloud/api/operation.proto";
 import "yandex/cloud/compute/v1/disk.proto";
 import "yandex/cloud/compute/v1/instance.proto";
+import "yandex/cloud/compute/v1/maintenance.proto";
 import "yandex/cloud/operation/operation.proto";
 import "yandex/cloud/validation.proto";
 
@@ -199,10 +201,20 @@ service InstanceService {
   // Running instance will be restarted during this operation.
   rpc Relocate(RelocateInstanceRequest) returns (operation.Operation) {
     option (google.api.http) = { post: "/compute/v1/instances/{instance_id}:relocate" body: "*" };
-      option (yandex.cloud.api.operation) = {
-          metadata: "RelocateInstanceMetadata"
-          response: "Instance"
-      };
+    option (yandex.cloud.api.operation) = {
+      metadata: "RelocateInstanceMetadata"
+      response: "Instance"
+    };
+  }
+
+  // maintenance
+
+  rpc SimulateMaintenanceEvent (SimulateInstanceMaintenanceEventRequest) returns (operation.Operation) {
+    option (google.api.http) = { post: "/compute/v1/instances/{instance_id}:simulateMaintenanceEvent" body: "*" };
+    option (yandex.cloud.api.operation) = {
+      metadata: "SimulateInstanceMaintenanceEventMetadata"
+      response: "google.protobuf.Empty"
+    };
   }
 
   // access
@@ -377,11 +389,20 @@ message CreateInstanceRequest {
   // Network settings.
   NetworkSettings network_settings = 15;
 
-  // GPU settings.
-  GpuSettings gpu_settings = 20;
-  
   // Placement policy configuration.
   PlacementPolicy placement_policy = 16;
+
+  // GPU settings.
+  GpuSettings gpu_settings = 20;
+
+  // Behaviour on maintenance events
+  MaintenancePolicy maintenance_policy = 21;
+
+  // Time between notification via metadata service and maintenance
+  google.protobuf.Duration maintenance_grace_period = 22 [(value) = "1s-24h"];
+
+  // Serial port settings
+  SerialPortSettings serial_port_settings = 23;
 }
 
 message CreateInstanceMetadata {
@@ -447,6 +468,15 @@ message UpdateInstanceRequest {
 
   // Scheduling policy configuration.
   SchedulingPolicy scheduling_policy = 12;
+
+  // Behaviour on maintenance events
+  MaintenancePolicy maintenance_policy = 14;
+
+  // Time between notification via metadata service and maintenance
+  google.protobuf.Duration maintenance_grace_period = 15 [(value) = "1s-24h"];
+
+  // Serial port settings
+  SerialPortSettings serial_port_settings = 16;
 }
 
 message UpdateInstanceMetadata {
@@ -652,7 +682,7 @@ message RemoveInstanceOneToOneNatMetadata {
 }
 
 message UpdateInstanceNetworkInterfaceRequest {
-  // ID of the network interface that is being updated.
+  // ID of the instance that is being updated.
   string instance_id = 1 [(required) = true];
 
   // The index of the network interface to be updated.
@@ -680,6 +710,14 @@ message UpdateInstanceNetworkInterfaceMetadata {
 
   // The index of the network interface.
   string network_interface_index = 2;
+}
+
+message SimulateInstanceMaintenanceEventRequest{
+  string instance_id = 1 [(required) = true, (length) = "<=50"];
+}
+
+message SimulateInstanceMaintenanceEventMetadata {
+  string instance_id = 1;
 }
 
 message ListInstanceOperationsRequest {

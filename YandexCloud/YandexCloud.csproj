@@ -12,12 +12,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.3.0</Version>
+    <Version>1.5.0</Version>
     <PackageId>XyloCode.ThirdPartyServices.YandexCloud</PackageId>
     <Title>YandexCloud</Title>
     <RepositoryUrl>https://github.com/xylocode/ThirdPartyServices.YandexCloud</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Copyright>Copyright (c) 2023 YANDEX LLC, Sergey Korobeynikov</Copyright>
+    <Copyright>Copyright (c) 2024 YANDEX LLC, Sergey Korobeynikov</Copyright>
     <Authors>xylocode</Authors>
     <Description>Unofficial assembly of .proto files for working with the Yandex.Cloud API using the gRPC protocol.</Description>
     <PackageProjectUrl>https://xylocode.com/third-party-services/yandex.cloud/</PackageProjectUrl>
@@ -33,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.25.1" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.59.0">
+    <PackageReference Include="Google.Protobuf" Version="3.25.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.60.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.61.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
